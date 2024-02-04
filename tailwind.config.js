@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        inter: ["Noto", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
     },
   },
