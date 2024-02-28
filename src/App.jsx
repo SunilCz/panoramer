@@ -7,10 +7,11 @@ import {
   PhotoIcon,
   WindowIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const navigation = [
-  { name: "Stitch Images", href: "#" },
-  { name: "Examples", href: "#" },
+  { name: "Stitch Images", href: "stitch-images" },
+  { name: "Examples", href: "examples" },
 ];
 
 const features = [
@@ -63,13 +64,13 @@ export default function App() {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <div className="hidden lg:flex lg:gap-x-12">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
+                  to={item.href}
                   className="text-sm font-semibold leading-6 text-gray-900"
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
               <a
                 href="https://github.com/iambasantarai/panoramer"
