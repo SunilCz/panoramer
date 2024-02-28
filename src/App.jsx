@@ -34,7 +34,7 @@ const features = [
   },
 ];
 
-export default function Example() {
+export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
