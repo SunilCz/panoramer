@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="grid place-items-center pb-5 pt-20 sm:pt-10">
+    <div className="grid place-items-center pb-5 pt-24 sm:pt-32">
       <div className="flex w-full max-w-[22rem] items-center gap-2">
         <div className="h-px w-full bg-current opacity-20 dark:opacity-30"></div>
         <div className="shrink-0">A final year project, by</div>
