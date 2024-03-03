@@ -46,6 +46,18 @@ export default function Stitch() {
     }
   };
 
+  const handleClear = async () => {
+    try {
+      const response = await axios.delete(`${apiEndpoint}/clear-uploads`);
+
+      console.log("Clear response:", response.data.message);
+
+      setFiles([]);
+    } catch (error) {
+      console.log("ERROR: ", error);
+    }
+  };
+
   return (
     <Layout>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24">
@@ -86,6 +98,7 @@ export default function Stitch() {
 
                   <a
                     href="#"
+                    onClick={handleClear}
                     className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
                   >
                     <span>Clear</span>
