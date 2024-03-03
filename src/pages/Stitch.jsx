@@ -16,16 +16,25 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import Spinner from "../components/Spinner";
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 export default function Stitch() {
   const [files, setFiles] = useState([]);
   const [finalPanorama, setFinalPanorama] = useState("");
+  const [siftCorrespondences, setSiftCorrespondences] = useState("");
+  const [inliersAndOutliers, setInliersAndOutliers] = useState("");
+  const [panoramas, setPanoramas] = useState("");
+
+  const [isUploading, setIsUploading] = useState(false);
+  const [isClearing, setIsClearing] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const apiEndpoint = "http://127.0.0.1:5000";
 
   const handleUpload = async () => {
+    setIsUploading(true);
     try {
       const formData = new FormData();
 
@@ -42,24 +51,33 @@ export default function Stitch() {
       console.log("Upload response:", response.data.message);
 
       setFiles([]);
+
+      setIsUploading(false);
     } catch (error) {
       console.log("ERROR: ", error);
     }
   };
 
   const handleClear = async () => {
+    setIsClearing(true);
     try {
       const response = await axios.delete(`${apiEndpoint}/clear-uploads`);
 
       console.log("Clear response:", response.data.message);
 
       setFiles([]);
+      setFinalPanorama("");
+      setSiftCorrespondences("");
+      setInliersAndOutliers("");
+
+      setIsClearing(false);
     } catch (error) {
       console.log("ERROR: ", error);
     }
   };
 
   const handleGeneratePanorama = async () => {
+    setIsGenerating(true);
     try {
       const response = await axios.get(`${apiEndpoint}/generate-panorama`);
 
@@ -69,9 +87,13 @@ export default function Stitch() {
       const finalPanoramaPath = results.panoramas[0];
       setFinalPanorama(`${apiEndpoint}/serve-files/${finalPanoramaPath}`);
 
+      setSiftCorrespondences(results.sift_correspondences);
+      setSiftCorrespondences(results.inliers_outliers);
+      setPanoramas(results.panoramas);
+
       console.log("Generate Panorama response:", message);
 
-      setFiles([]);
+      setIsGenerating(false);
     } catch (error) {
       console.log("ERROR: ", error);
     }
@@ -105,7 +127,7 @@ export default function Stitch() {
                     onClick={handleUpload}
                     className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
                   >
-                    <span>Upload</span>
+                    {isUploading ? <Spinner /> : <span>Upload</span>}
                   </a>
 
                   <a
@@ -113,7 +135,11 @@ export default function Stitch() {
                     onClick={handleGeneratePanorama}
                     className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
                   >
-                    <span>Generate Panorama</span>
+                    {isGenerating ? (
+                      <Spinner />
+                    ) : (
+                      <span>Generate Panorama</span>
+                    )}
                   </a>
 
                   <a
@@ -121,7 +147,7 @@ export default function Stitch() {
                     onClick={handleClear}
                     className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
                   >
-                    <span>Clear</span>
+                    {isClearing ? <Spinner /> : <span>Clear</span>}
                   </a>
                 </li>
               </ul>
