@@ -4,6 +4,7 @@ import axios from "axios";
 import Artifact from "../components/Artifact";
 import Download from "../components/Download";
 import Layout from "../components/Layout";
+import ProgressIndicator from "../components/ProgressIndicator";
 
 import {
   AdjustmentsHorizontalIcon,
@@ -154,13 +155,20 @@ export default function Stitch() {
             </form>
 
             <div className="lg:col-span-3">
-              <img
-                src={finalPanorama}
-                alt="App screenshot"
-                width={2432}
-                height={1442}
-                className="rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
-              />
+              <div className="relative">
+                <img
+                  src={finalPanorama}
+                  alt="App screenshot"
+                  width={2432}
+                  height={1442}
+                  className="rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
+                />
+                {isGenerating && (
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+                    <ProgressIndicator />
+                  </div>
+                )}
+              </div>
 
               <div className="flex items-center mt-6 justify-between">
                 <div className="flex items-center gap-2.5 text font-medium text-gray-400">
