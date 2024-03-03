@@ -1,10 +1,35 @@
-const Download = () => {
+import axios from "axios";
+
+const Download = ({ imageURL }) => {
+  const handleDownloadImage = async () => {
+    try {
+      const response = await axios.get(imageURL, { responseType: "blob" });
+
+      const blob = new Blob([response.data], {
+        type: response.headers["content-type"],
+      });
+
+      const fileName = "panorama.png";
+
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+
+      link.setAttribute("download", fileName);
+      link.setAttribute("target", "_blank");
+
+      link.click();
+
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.log("ERROR: ", error);
+    }
+  };
+
   return (
     <div className="flex items-center gap-2 xl:justify-end">
-      <a
+      <button
         href="#"
-        target="_blank"
-        rel="noreferrer"
+        onClick={handleDownloadImage}
         className="inline-flex items-center gap-1.5 rounded-full text-sm text-gray-400 font-medium px-4 py-1.5 bg-gray-800 transition hover:bg-gray-700/60"
       >
         <svg
@@ -23,7 +48,7 @@ const Download = () => {
         </svg>
 
         <span>Download</span>
-      </a>
+      </button>
     </div>
   );
 };

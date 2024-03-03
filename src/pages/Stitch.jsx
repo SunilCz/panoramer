@@ -208,7 +208,7 @@ export default function Stitch() {
                   </h2>
                 </div>
 
-                <Download />
+                <Download imageURL={finalPanorama} />
               </div>
 
               <div className="flex mt-8 gap-x-4">
