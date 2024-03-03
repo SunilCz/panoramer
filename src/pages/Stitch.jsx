@@ -21,6 +21,7 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 export default function Stitch() {
   const [files, setFiles] = useState([]);
+  const [finalPanorama, setFinalPanorama] = useState("");
 
   const apiEndpoint = "http://127.0.0.1:5000";
 
@@ -51,6 +52,24 @@ export default function Stitch() {
       const response = await axios.delete(`${apiEndpoint}/clear-uploads`);
 
       console.log("Clear response:", response.data.message);
+
+      setFiles([]);
+    } catch (error) {
+      console.log("ERROR: ", error);
+    }
+  };
+
+  const handleGeneratePanorama = async () => {
+    try {
+      const response = await axios.get(`${apiEndpoint}/generate-panorama`);
+
+      const [responseData, status] = response.data;
+      const { message, results } = responseData;
+
+      const finalPanoramaPath = results.panoramas[0];
+      setFinalPanorama(`${apiEndpoint}/serve-files/${finalPanoramaPath}`);
+
+      console.log("Generate Panorama response:", message);
 
       setFiles([]);
     } catch (error) {
@@ -91,6 +110,7 @@ export default function Stitch() {
 
                   <a
                     href="#"
+                    onClick={handleGeneratePanorama}
                     className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
                   >
                     <span>Generate Panorama</span>
@@ -109,7 +129,7 @@ export default function Stitch() {
 
             <div className="lg:col-span-3">
               <img
-                src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+                src={finalPanorama}
                 alt="App screenshot"
                 width={2432}
                 height={1442}
