@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 
 import Artifact from "../components/Artifact";
 import Download from "../components/Download";
@@ -21,6 +22,30 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 export default function Stitch() {
   const [files, setFiles] = useState([]);
 
+  const apiEndpoint = "http://127.0.0.1:5000";
+
+  const handleUpload = async () => {
+    try {
+      const formData = new FormData();
+
+      files.forEach((file) => {
+        formData.append("files[]", file);
+      });
+
+      const response = await axios.post(`${apiEndpoint}/upload`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("Upload response:", response.data.message);
+
+      setFiles([]);
+    } catch (error) {
+      console.log("ERROR: ", error);
+    }
+  };
+
   return (
     <Layout>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24">
@@ -29,7 +54,10 @@ export default function Stitch() {
             <form className="hidden lg:block">
               <FilePond
                 files={files}
-                onupdatefiles={setFiles}
+                onupdatefiles={(fileItems) => {
+                  const newFiles = fileItems.map((fileItem) => fileItem.file);
+                  setFiles(newFiles);
+                }}
                 allowMultiple={true}
                 maxFiles={10}
                 name="files"
@@ -43,16 +71,19 @@ export default function Stitch() {
                 <li className="space-y-4">
                   <a
                     href="#"
+                    onClick={handleUpload}
                     className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
                   >
                     <span>Upload</span>
                   </a>
+
                   <a
                     href="#"
                     className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
                   >
                     <span>Generate Panorama</span>
                   </a>
+
                   <a
                     href="#"
                     className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
