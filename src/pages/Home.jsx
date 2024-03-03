@@ -1,6 +1,7 @@
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 import { Link } from "react-router-dom";
+import ScrollToTopButton from "../components/scroll";
 
 import {
   VariableIcon,
@@ -85,7 +86,6 @@ const Home = () => {
           />
         </div>
       </div>
-
       <div className="mx-auto max-w-7xl px-6 sm:mt-20 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-200 sm:text-4xl">
@@ -99,7 +99,6 @@ const Home = () => {
           </p>
         </div>
       </div>
-
       <div className="mx-auto max-w-7xl px-6 sm:mt-24 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-200 sm:text-4xl">
@@ -132,8 +131,8 @@ const Home = () => {
           </dl>
         </div>
       </div>
-
       <Footer />
+      <ScrollToTopButton />
     </Layout>
   );
 };

@@ -8,6 +8,7 @@ import Layout from "../components/Layout";
 import ProgressIndicator from "../components/ProgressIndicator";
 import Spinner from "../components/Spinner";
 import ArtifactGallery from "../components/ArtifactGallery";
+import ScrollToTopButton from "../components/scroll";
 
 import {
   AdjustmentsHorizontalIcon,
@@ -288,6 +289,7 @@ export default function Stitch() {
           </div>
         </section>
       </div>
+      <ScrollToTopButton />
     </Layout>
   );
 }
