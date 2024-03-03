@@ -103,6 +103,7 @@ export default function Stitch() {
         setFinalPanorama("/placeholder.png");
         setSiftCorrespondences("");
         setInliersAndOutliers("");
+        setPanoramas("");
         setFinalPanoramaName("");
         setGalleryTitle("");
         setArtifacts([]);
@@ -131,7 +132,7 @@ export default function Stitch() {
         setFinalPanorama(`${apiEndpoint}/serve-files/${finalPanoramaPath}`);
 
         setSiftCorrespondences(results.sift_correspondences);
-        setSiftCorrespondences(results.inliers_outliers);
+        setInliersAndOutliers(results.inliers_outliers);
         setPanoramas(results.panoramas);
         toast.success(message);
 
