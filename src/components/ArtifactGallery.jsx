@@ -9,15 +9,18 @@ const ArtifactGallery = ({ title, artifacts }) => {
       </h2>
 
       <div className="mt-10 space-y-4">
-        {artifacts.map((artifact, index) => (
-          <div key={index}>
-            <img
-              key={index}
-              src={`${apiEndpoint}/serve-files/${artifact}`}
-              alt={`Artifact ${index}`}
-              className="rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
-            />
-            <p className="text-center text-xl text-gray-400">{artifact}</p>
+        {artifacts.map((artifactGroup, groupIndex) => (
+          <div key={groupIndex}>
+            {artifactGroup.map((artifact, index) => (
+              <div key={`${groupIndex}-${index}`}>
+                <img
+                  src={`${apiEndpoint}/serve-files/${artifact}`}
+                  alt={`Artifact ${groupIndex}-${index}`}
+                  className="rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
+                />
+                <p className="text-center text-xl text-gray-400">{artifact}</p>
+              </div>
+            ))}
           </div>
         ))}
       </div>
