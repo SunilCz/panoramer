@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
+import { Toaster, toast } from "sonner";
 
 import Artifact from "../components/Artifact";
 import Download from "../components/Download";
 import Layout from "../components/Layout";
 import ProgressIndicator from "../components/ProgressIndicator";
+import Spinner from "../components/Spinner";
 
 import {
   AdjustmentsHorizontalIcon,
@@ -17,7 +19,6 @@ import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
-import Spinner from "../components/Spinner";
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
@@ -50,12 +51,15 @@ export default function Stitch() {
         },
       });
 
-      console.log("Upload response:", response.data.message);
+      if (response.status === 201) {
+        toast.success(response.data.message);
+        setFiles([]);
 
-      setFiles([]);
-
-      setIsUploading(false);
+        setIsUploading(false);
+      }
     } catch (error) {
+      setIsUploading(false);
+      toast.error(error.response.data.message);
       console.log("ERROR: ", error);
     }
   };
@@ -67,13 +71,19 @@ export default function Stitch() {
 
       console.log("Clear response:", response.data.message);
 
-      setFiles([]);
-      setFinalPanorama("/placeholder.png");
-      setSiftCorrespondences("");
-      setInliersAndOutliers("");
+      if (response.status === 200) {
+        toast.success(response.data.message);
 
-      setIsClearing(false);
+        setFiles([]);
+        setFinalPanorama("/placeholder.png");
+        setSiftCorrespondences("");
+        setInliersAndOutliers("");
+
+        setIsClearing(false);
+      }
     } catch (error) {
+      toast.error(error.response.data.message);
+      setIsClearing(false);
       console.log("ERROR: ", error);
     }
   };
@@ -83,27 +93,32 @@ export default function Stitch() {
     try {
       const response = await axios.get(`${apiEndpoint}/generate-panorama`);
 
-      const [responseData, status] = response.data;
-      const { message, results } = responseData;
+      if (response.status === 200) {
+        const [responseData] = response.data;
+        const { message, results } = responseData;
 
-      const finalPanoramaPath = results.panoramas[0];
-      setFinalPanoramaName(finalPanoramaPath);
-      setFinalPanorama(`${apiEndpoint}/serve-files/${finalPanoramaPath}`);
+        const finalPanoramaPath = results.panoramas[0];
+        setFinalPanoramaName(finalPanoramaPath);
+        setFinalPanorama(`${apiEndpoint}/serve-files/${finalPanoramaPath}`);
 
-      setSiftCorrespondences(results.sift_correspondences);
-      setSiftCorrespondences(results.inliers_outliers);
-      setPanoramas(results.panoramas);
+        setSiftCorrespondences(results.sift_correspondences);
+        setSiftCorrespondences(results.inliers_outliers);
+        setPanoramas(results.panoramas);
+        toast.success(message);
 
-      console.log("Generate Panorama response:", message);
-
-      setIsGenerating(false);
+        setIsGenerating(false);
+      }
     } catch (error) {
+      toast.error(error.response.data.message);
+      setIsGenerating(false);
       console.log("ERROR: ", error);
     }
   };
 
   return (
     <Layout>
+      <Toaster richColors />
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24">
         <section aria-labelledby="products-heading" className="pb-24 pt-6">
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
