@@ -23,7 +23,8 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 export default function Stitch() {
   const [files, setFiles] = useState([]);
-  const [finalPanorama, setFinalPanorama] = useState("");
+  const [finalPanorama, setFinalPanorama] = useState("/placeholder.png");
+  const [finalPanoramaName, setFinalPanoramaName] = useState("");
   const [siftCorrespondences, setSiftCorrespondences] = useState("");
   const [inliersAndOutliers, setInliersAndOutliers] = useState("");
   const [panoramas, setPanoramas] = useState("");
@@ -67,7 +68,7 @@ export default function Stitch() {
       console.log("Clear response:", response.data.message);
 
       setFiles([]);
-      setFinalPanorama("");
+      setFinalPanorama("/placeholder.png");
       setSiftCorrespondences("");
       setInliersAndOutliers("");
 
@@ -86,6 +87,7 @@ export default function Stitch() {
       const { message, results } = responseData;
 
       const finalPanoramaPath = results.panoramas[0];
+      setFinalPanoramaName(finalPanoramaPath);
       setFinalPanorama(`${apiEndpoint}/serve-files/${finalPanoramaPath}`);
 
       setSiftCorrespondences(results.sift_correspondences);
@@ -185,7 +187,9 @@ export default function Stitch() {
                       d="M1.667 4.667h12.666m-3.466-3 1.8 3M7 1.333l2 3.334m-5.333-3 1.666 3M5 11.333a.333.333 0 1 1-.667 0m.667 0a.333.333 0 0 0-.667 0m.667 0h-.667m2.334 3.334h2.666c1.867 0 2.8 0 3.514-.364a3.333 3.333 0 0 0 1.456-1.456c.364-.713.364-1.647.364-3.514V6.667c0-1.867 0-2.8-.364-3.514a3.333 3.333 0 0 0-1.456-1.456c-.713-.364-1.647-.364-3.514-.364H6.667c-1.867 0-2.8 0-3.514.364-.627.32-1.137.83-1.456 1.456-.364.713-.364 1.647-.364 3.514v2.666c0 1.867 0 2.8.364 3.514.32.627.83 1.137 1.456 1.456.713.364 1.647.364 3.514.364Z"
                     ></path>
                   </svg>
-                  <h2>Image Name</h2>
+                  <h2>
+                    {finalPanoramaName ? finalPanoramaName : "Image Name"}
+                  </h2>
                 </div>
 
                 <Download />
