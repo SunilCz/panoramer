@@ -7,6 +7,7 @@ import Download from "../components/Download";
 import Layout from "../components/Layout";
 import ProgressIndicator from "../components/ProgressIndicator";
 import Spinner from "../components/Spinner";
+import ArtifactGallery from "../components/ArtifactGallery";
 
 import {
   AdjustmentsHorizontalIcon,
@@ -34,7 +35,33 @@ export default function Stitch() {
   const [isClearing, setIsClearing] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
 
+  const [selectedArtifact, setSelectedArtifact] = useState("");
+  const [artifacts, setArtifacts] = useState([]);
+  const [galleryTitle, setGalleryTitle] = useState("");
+
   const apiEndpoint = "http://127.0.0.1:5000";
+
+  const handleArtifactSelection = (artifact) => {
+    setSelectedArtifact(artifact);
+
+    switch (artifact) {
+      case "siftMatches":
+        setGalleryTitle("SIFT correspondences between images");
+        setArtifacts([siftCorrespondences]);
+        break;
+      case "inliersOutliers":
+        setGalleryTitle("Inliers & Outliers");
+        setArtifacts([inliersAndOutliers]);
+        break;
+      case "panoramas":
+        setGalleryTitle("Panoramas");
+        setArtifacts([panoramas]);
+        break;
+      default:
+        setGalleryTitle("");
+        setArtifacts([]);
+    }
+  };
 
   const handleUpload = async () => {
     setIsUploading(true);
@@ -69,8 +96,6 @@ export default function Stitch() {
     try {
       const response = await axios.delete(`${apiEndpoint}/clear-uploads`);
 
-      console.log("Clear response:", response.data.message);
-
       if (response.status === 200) {
         toast.success(response.data.message);
 
@@ -79,6 +104,9 @@ export default function Stitch() {
         setSiftCorrespondences("");
         setInliersAndOutliers("");
         setFinalPanoramaName("");
+        setGalleryTitle("");
+        setArtifacts([]);
+        setSelectedArtifact("");
 
         setIsClearing(false);
       }
@@ -222,6 +250,7 @@ export default function Stitch() {
                       className="text-gray-200"
                     />
                   }
+                  onClick={() => handleArtifactSelection("siftMatches")}
                 />
 
                 <Artifact
@@ -234,6 +263,7 @@ export default function Stitch() {
                       className="text-gray-200"
                     />
                   }
+                  onClick={() => handleArtifactSelection("inliersOutliers")}
                 />
 
                 <Artifact
@@ -246,8 +276,13 @@ export default function Stitch() {
                       className="text-gray-200"
                     />
                   }
+                  onClick={() => handleArtifactSelection("panoramas")}
                 />
               </div>
+
+              {selectedArtifact && (
+                <ArtifactGallery title={galleryTitle} artifacts={artifacts} />
+              )}
             </div>
           </div>
         </section>
