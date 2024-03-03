@@ -78,6 +78,7 @@ export default function Stitch() {
         setFinalPanorama("/placeholder.png");
         setSiftCorrespondences("");
         setInliersAndOutliers("");
+        setFinalPanoramaName("");
 
         setIsClearing(false);
       }
@@ -181,7 +182,7 @@ export default function Stitch() {
                   className="rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
                 />
                 {isGenerating && (
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+                  <div className="absolute inset-0 bg-gray-800/25 bg-opacity-50 backdrop-blur-md flex justify-center items-center">
                     <ProgressIndicator />
                   </div>
                 )}
