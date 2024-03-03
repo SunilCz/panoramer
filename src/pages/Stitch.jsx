@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Artifact from "../components/Artifact";
 import Download from "../components/Download";
 import Layout from "../components/Layout";
@@ -8,24 +10,37 @@ import {
   PhotoIcon,
 } from "@heroicons/react/24/outline";
 
+import { FilePond, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
+
 export default function Stitch() {
+  const [files, setFiles] = useState([]);
+
   return (
     <Layout>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24">
         <section aria-labelledby="products-heading" className="pb-24 pt-6">
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
             <form className="hidden lg:block">
+              <FilePond
+                files={files}
+                onupdatefiles={setFiles}
+                allowMultiple={true}
+                maxFiles={10}
+                name="files"
+                labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+              />
+
               <ul
                 role="list"
                 className="space-y-4 pb-6 text-sm font-medium text-gray-400"
               >
                 <li className="space-y-4">
-                  <a
-                    href="#"
-                    className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
-                  >
-                    <span>Clear</span>
-                  </a>
                   <a
                     href="#"
                     className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
@@ -37,6 +52,12 @@ export default function Stitch() {
                     className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
                   >
                     <span>Generate Panorama</span>
+                  </a>
+                  <a
+                    href="#"
+                    className="flex justify-center gap-2 items-center px-4 py-3 bg-[#53B5FF]/95 rounded-full font-medium text-gray-100 text-center"
+                  >
+                    <span>Clear</span>
                   </a>
                 </li>
               </ul>
