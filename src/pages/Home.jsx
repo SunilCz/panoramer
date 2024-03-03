@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
-
+import {Link } from "react-router-dom";
 const Home = () => {
   return (
     <Layout>
@@ -27,12 +27,12 @@ const Home = () => {
                 Effortlesly merge images and achieve flawless blending
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
-                <a
-                  href="#"
+                <Link
+                  to="/stitch-images"
                   className="rounded-md bg-[#53B5FF]/95 px-8 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#53B5FF] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
                 >
-                  Get started
-                </a>
+                  Try Panoramer
+                </Link>
               </div>
             </div>
             <img
