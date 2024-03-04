@@ -7,8 +7,34 @@
 Developed as a final year project by a team of [BSc.CSIT](#) [[Tribhuvan University](https://tu.edu.np/)] students , including [Basanta Rai](https://github.com/iambasantarai) along with [Robin Devkota](https://github.com/robindevkota) and [Sunil Chaudhary](https://github.com/sunilCz).
 Panoramer aims to deliver professional-quality panoramas with precise alignment and an intuitive interface, catering to users of all skill levels.
 
-## Algorithms
+### Algorithms
 
 - [SIFT](https://en.wikipedia.org/wiki/Scale-invariant_feature_transform)
 - [RANSAC](https://en.wikipedia.org/wiki/Random_sample_consensus)
 - [Levenberg Marquardt](https://en.wikipedia.org/wiki/Levenberg%E2%80%93Marquardt_algorithm)
+
+### Quick start
+
+Clone the repository
+
+```bash
+git clone git@github.com:iambasantarai/panoramer.git
+```
+
+Navigate to the project directory
+
+```bash
+cd panoramer
+```
+
+Install dependencies
+
+```bash
+yarn
+```
+
+Start the development server
+
+```bash
+yarn dev
+```
