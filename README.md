@@ -3,8 +3,9 @@
 </p>
 <h3 align="center">Panoramer: The ultimate solution for seamless image stitching</h1>
 
-**Panoramer** is a web application designed and developed to merge multiple overlapping images into a single panoramic image.
-This project utilizes computer vision techniques and algorithms to align and blend the images seamlessly, creating a visually pleasing panorama.
+**Panoramer** is a web application that seamlessly merges multiple overlapping images into a single panoramic image.
+Developed as a final year project by a team of [BSc.CSIT](#) [[Tribhuvan University](https://tu.edu.np/)] students , including [Basanta Rai](https://github.com/iambasantarai) along with [Robin Devkota](https://github.com/robindevkota) and [Sunil Chaudhary](https://github.com/sunilCz).
+Panoramer aims to deliver professional-quality panoramas with precise alignment and an intuitive interface, catering to users of all skill levels.
 
 ## Algorithms
 
