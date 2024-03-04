@@ -1,8 +1,13 @@
-# React + Vite
+<p align="center">
+    <img alt="Panoramer" src="./public/panoramer-logo.svg">
+</p>
+<h3 align="center">Panoramer: The ultimate solution for seamless image stitching</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Panoramer** is a web application designed and developed to merge multiple overlapping images into a single panoramic image.
+This project utilizes computer vision techniques and algorithms to align and blend the images seamlessly, creating a visually pleasing panorama.
 
-Currently, two official plugins are available:
+## Algorithms
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [SIFT](https://en.wikipedia.org/wiki/Scale-invariant_feature_transform)
+- [RANSAC](https://en.wikipedia.org/wiki/Random_sample_consensus)
+- [Levenberg Marquardt](https://en.wikipedia.org/wiki/Levenberg%E2%80%93Marquardt_algorithm)
