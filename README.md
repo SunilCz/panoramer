@@ -7,6 +7,8 @@
 Developed as a final year project by a team of [BSc.CSIT](#) [[Tribhuvan University](https://tu.edu.np/)] students , including [Basanta Rai](https://github.com/iambasantarai) along with [Robin Devkota](https://github.com/robindevkota) and [Sunil Chaudhary](https://github.com/sunilCz).
 Panoramer aims to deliver professional-quality panoramas with precise alignment and an intuitive interface, catering to users of all skill levels.
 
+<img alt="UI Screenshot" src="./public/ui-for-image-stitching.png">
+
 ### Algorithms
 
 - [SIFT](https://en.wikipedia.org/wiki/Scale-invariant_feature_transform)
