@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { FaArrowUp } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { ArrowUpIcon } from "@heroicons/react/24/outline";
 
 function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,10 +30,10 @@ function ScrollToTopButton() {
     <div className="fixed bottom-10 right-10">
       {isVisible && (
         <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-full h-12 w-12 hover:bg-blue-600 focus:outline-none flex items-center justify-center"
+          className="bg-[#53B5FF]/95 text-white px-4 py-2 rounded-full h-12 w-12 hover:bg-[#53B5FF] focus:outline-none flex items-center justify-center"
           onClick={scrollToTop}
         >
-          <FaArrowUp />
+          <ArrowUpIcon strokeWidth={3} />
         </button>
       )}
     </div>

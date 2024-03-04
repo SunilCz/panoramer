@@ -1,7 +1,7 @@
 import Footer from "../components/Footer";
 import Layout from "../components/Layout";
 import { Link } from "react-router-dom";
-import ScrollToTopButton from "../components/scroll";
+import ScrollToTopButton from "../components/Scroll";
 
 import {
   VariableIcon,

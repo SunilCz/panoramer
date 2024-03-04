@@ -8,7 +8,7 @@ import Layout from "../components/Layout";
 import ProgressIndicator from "../components/ProgressIndicator";
 import Spinner from "../components/Spinner";
 import ArtifactGallery from "../components/ArtifactGallery";
-import ScrollToTopButton from "../components/scroll";
+import ScrollToTopButton from "../components/Scroll";
 
 import {
   AdjustmentsHorizontalIcon,
