@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const navigation = [
-  { name: "Stitch Images", href: "stitch-images" },
-  { name: "Examples", href: "examples" },
+  { name: "Stitch Images", href: "/stitch-images" },
+  { name: "Examples", href: "/examples" },
 ];
 
 const Header = () => {
