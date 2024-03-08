@@ -242,44 +242,50 @@ export default function Stitch() {
               </div>
 
               <div className="flex mt-8 gap-x-4">
-                <Artifact
-                  title={"SIFT matches"}
-                  subtitle={"View sift correspondences"}
-                  icon={
-                    <AdjustmentsHorizontalIcon
-                      height={42}
-                      width={42}
-                      className="text-gray-200"
-                    />
-                  }
-                  onClick={() => handleArtifactSelection("siftMatches")}
-                />
+                {siftCorrespondences && (
+                  <Artifact
+                    title={"SIFT matches"}
+                    subtitle={"View sift correspondences"}
+                    icon={
+                      <AdjustmentsHorizontalIcon
+                        height={42}
+                        width={42}
+                        className="text-gray-200"
+                      />
+                    }
+                    onClick={() => handleArtifactSelection("siftMatches")}
+                  />
+                )}
 
-                <Artifact
-                  title={"Inliers & Outliers"}
-                  subtitle={"View inliers & outliers"}
-                  icon={
-                    <ArrowsPointingOutIcon
-                      height={42}
-                      width={42}
-                      className="text-gray-200"
-                    />
-                  }
-                  onClick={() => handleArtifactSelection("inliersOutliers")}
-                />
+                {inliersAndOutliers && (
+                  <Artifact
+                    title={"Inliers & Outliers"}
+                    subtitle={"View inliers & outliers"}
+                    icon={
+                      <ArrowsPointingOutIcon
+                        height={42}
+                        width={42}
+                        className="text-gray-200"
+                      />
+                    }
+                    onClick={() => handleArtifactSelection("inliersOutliers")}
+                  />
+                )}
 
-                <Artifact
-                  title={"Panoramas"}
-                  subtitle={"View step wise panorama creation"}
-                  icon={
-                    <PhotoIcon
-                      height={42}
-                      width={42}
-                      className="text-gray-200"
-                    />
-                  }
-                  onClick={() => handleArtifactSelection("panoramas")}
-                />
+                {panoramas && (
+                  <Artifact
+                    title={"Panoramas"}
+                    subtitle={"View step wise panorama creation"}
+                    icon={
+                      <PhotoIcon
+                        height={42}
+                        width={42}
+                        className="text-gray-200"
+                      />
+                    }
+                    onClick={() => handleArtifactSelection("panoramas")}
+                  />
+                )}
               </div>
 
               {selectedArtifact && (

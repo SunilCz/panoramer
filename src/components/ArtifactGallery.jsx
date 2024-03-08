@@ -18,7 +18,9 @@ const ArtifactGallery = ({ title, artifacts }) => {
                   alt={`Artifact ${groupIndex}-${index}`}
                   className="rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
                 />
-                <p className="text-center text-xl text-gray-400">{artifact}</p>
+                <p className="mt-2 mb-8 text-center text-xl text-gray-400">
+                  {artifact}
+                </p>
               </div>
             ))}
           </div>
