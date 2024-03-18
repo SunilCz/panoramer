@@ -40,7 +40,7 @@ export default function Stitch() {
   const [artifacts, setArtifacts] = useState([]);
   const [galleryTitle, setGalleryTitle] = useState("");
 
-  const apiEndpoint = "http://127.0.0.1:5000";
+  const apiEndpoint = import.meta.env.VITE_API_URL;
 
   const handleArtifactSelection = (artifact) => {
     setSelectedArtifact(artifact);

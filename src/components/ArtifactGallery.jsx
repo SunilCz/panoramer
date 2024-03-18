@@ -1,6 +1,5 @@
 const ArtifactGallery = ({ title, artifacts }) => {
-  console.log(artifacts);
-  const apiEndpoint = "http://127.0.0.1:5000";
+  const apiEndpoint = import.meta.env.VITE_API_URL;
 
   return (
     <div className="mt-8">
